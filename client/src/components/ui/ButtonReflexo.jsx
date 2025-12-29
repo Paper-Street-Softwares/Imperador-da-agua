@@ -8,8 +8,8 @@ export default function ButtonReflexo({
   className,
 }) {
   const themes = {
-    light: 'bg-lighter text-primary border border-primary/20 ',
-    dark: 'bg-primary text-fontLighterFooter',
+    light: 'bg-lighter text-[#161A4A] border border-primary/20 ',
+    dark: 'bg-transparent text-white',
   }
 
   const shineThemes = {
@@ -31,14 +31,14 @@ export default function ButtonReflexo({
       className={`${className}
           relative
           overflow-hidden
-          inline-flex
+          flex
           items-center
           justify-center
           ${colors} 
           ${spacing}
           font-normal font-secondFont rounded-full text-lg 
           transition-all hover:scale-105 shadow-lg shadow-primary/20 gap-3
-          min-w-[10px] text-sm
+          min-w-[10px] text-sm cursor-pointer
           text-center
         `}
     >
