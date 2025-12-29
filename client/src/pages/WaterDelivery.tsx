@@ -23,6 +23,11 @@ import {
   Phone,
   X,
   Menu,
+  IdCardIcon,
+  CreditCard,
+  Car,
+  Zap,
+  MessageCircleHeart,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -38,6 +43,8 @@ import ButtonReflexo from '../../../client/src/components/ui/ButtonReflexo.jsx'
 import Logo from '../../../attached_assets/logo/imgLogo.webp'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-scroll'
+import WhatsappAnimated from '../../../client/src/components/ui/WhatsAppAnimated.jsx'
+import imgCta from '../../../attached_assets/Cta/imgCta.webp'
 
 const products = [
   {
@@ -129,7 +136,7 @@ const faqs = [
 ]
 
 const ctaWhatsApp =
-  'https://wa.me/+55991512007?text= Olá! Vim através do site de vocês e gostaria de tirar umas dúvidas.'
+  'https://wa.me/+55991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral. Pode me explicar?'
 
 export default function WaterDelivery() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -299,7 +306,7 @@ export default function WaterDelivery() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-8xl w-[90%] font-black text-white leading-[0.9] tracking-tighter"
+              className="text-4xl md:text-8xl lg:text-6xl w-[90%] font-black text-white leading-[0.9] tracking-tighter"
             >
               Nunca mais fique sem{' '}
               <i>
@@ -326,7 +333,7 @@ export default function WaterDelivery() {
             >
               <ButtonReflexo
                 link={ctaWhatsApp}
-                label="ASSINAR AGORA"
+                label="Assinar agora"
                 icon={
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -366,17 +373,41 @@ export default function WaterDelivery() {
               transition={{ delay: 0.6 }}
               className="flex items-center gap-6 pt-8 border-t border-white/10"
             >
-              <div className="flex flex-col sm:flex-row space-y-4 mx-auto m- justify-between">
+              <div className="flex flex-col gap-3 mx-auto justify-between items-center sm:items-start w-full">
                 <p className="text-white font-bold flex items-center gap-2 sm:text-sm">
                   <Check className="w-5 h-5 text-[#30BEFF]" /> Simples, rápido e
                   do seu jeito.
                 </p>
-                <p className="text-slate-400 text-sm flex flex-col items-center gap-4">
-                  <span>💳 Pix • Dinheiro • Cartão</span>
-                  <span className="flex items-center gap-1 text-[#30BEFF]">
-                    🚚 <strong>Entrega GRÁTIS</strong>
+
+                <p className="text-slate-400 text-sm flex flex-col ">
+                  <span className="inline-flex items-center gap-2">
+                    <span>
+                      <CreditCard className="w-5 h-5 text-[#30BEFF]" />
+                    </span>{' '}
+                    Pix • Dinheiro • Cartão
                   </span>
                 </p>
+                <span className="flex items-center gap-2 text-[#30BEFF]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-van-icon lucide-van"
+                  >
+                    <path d="M13 6v5a1 1 0 0 0 1 1h6.102a1 1 0 0 1 .712.298l.898.91a1 1 0 0 1 .288.702V17a1 1 0 0 1-1 1h-3" />
+                    <path d="M5 18H3a1 1 0 0 1-1-1V8a2 2 0 0 1 2-2h12c1.1 0 2.1.8 2.4 1.8l1.176 4.2" />
+                    <path d="M9 18h5" />
+                    <circle cx="16" cy="18" r="2" />
+                    <circle cx="7" cy="18" r="2" />
+                  </svg>{' '}
+                  <strong>Entrega GRÁTIS</strong>
+                </span>
               </div>
             </motion.div>
           </div>
@@ -389,7 +420,172 @@ export default function WaterDelivery() {
 
       {/* Features */}
       <section id="services" className="py-24 bg-slate-50">
+        <div className="text-center max-w-2xl mx-auto mb-20 space-y-4">
+          <h2 className="text-4xl md:text-6xl font-black text-[#161A4A] tracking-tighter">
+            É simples assim
+          </h2>
+          {/* <p className="text-slate-500 text-lg">
+            A hidratação da sua família com economia e conveniência total.
+          </p> */}
+        </div>
         <div className="container mx-auto  max-w-[1215px] w-[90%]">
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Clock,
+                title: 'Escolha o plano ideal',
+                desc: 'Para o consumo real da sua casa ou empresa.',
+              },
+              {
+                icon: ShieldCheck,
+                title: 'Assine online em minutos',
+                desc: 'Tudo rápido, direto pelo WhatsApp.',
+              },
+              {
+                icon: Droplets,
+                title: 'Receba em casa, no dia certo',
+                desc: 'Entrega programada, sem taxa e sem preocupação.',
+              },
+            ].map((feature, i) => (
+              <Card
+                key={i}
+                className="border-none shadow-sm hover:shadow-xl transition-all duration-300 p-8 rounded-3xl bg-white group"
+              >
+                <div className="p-4 bg-blue-50 text-blue-600 rounded-2xl w-fit mb-6 group-hover:bg-[#30BEFF] group-hover:text-white transition-colors">
+                  <feature.icon className="w-8 h-8" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-[#161A4A] font-heading">
+                  {feature.title}
+                </h3>
+                <p className="text-slate-600 leading-relaxed">{feature.desc}</p>
+              </Card>
+            ))}
+          </div>
+          <ButtonReflexo
+            link={ctaWhatsApp}
+            label="Assinar agora"
+            icon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={18}
+                height={18}
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.197.297-.768.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.793.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.288.173-1.412-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.896a9.825 9.825 0 012.893 6.994c-.002 5.45-4.436 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.158 11.892c0 2.096.547 4.142 1.588 5.94L0 24l6.305-1.654a11.882 11.882 0 005.732 1.463h.005c6.554 0 11.89-5.335 11.892-11.892a11.821 11.821 0 00-3.466-8.413" />
+              </svg>
+            }
+            className="bg-[#30BEFF] w-fit mx-auto mt-8 font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group duration-700 transition-all"
+          />
+        </div>
+      </section>
+      {/* Why Subscribe Section */}
+      <section className="pb-24 bg-slate-50">
+        <div className="container mx-auto max-w-[1215px] w-[90%]">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-slate-50">
+                <img
+                  src={imgCta}
+                  alt="Estoque Imperador da Água"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-6 -right-3 bg-[#30BEFF] text-white p-8 rounded-[2rem] shadow-xl">
+                <p className="text-4xl font-black italic">100%</p>
+                <p className="text-xs font-bold uppercase tracking-widest">
+                  Disponibilidade
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-10"
+            >
+              <div className="space-y-4">
+                <h2 className="text-4xl md:text-5xl font-black text-[#161A4A] tracking-tighter leading-tight">
+                  Por que assinar com o{' '}
+                  <span className="text-[#30BEFF]">Imperador da Água?</span>
+                </h2>
+              </div>
+
+              <div className="space-y-8">
+                {[
+                  {
+                    title: 'Entrega programada',
+                    desc: 'Chega antes da água acabar.',
+                    icon: Clock,
+                  },
+                  {
+                    title: 'Reserva garantida',
+                    desc: 'Mesmo em alta demanda, sua água está garantida.',
+                    icon: ShieldCheck,
+                  },
+                  {
+                    title: 'Preço travado',
+                    desc: 'Nada de sustos com aumento inesperado.',
+                    icon: Zap,
+                  },
+                  {
+                    title: 'Zero preocupação',
+                    desc: 'Nunca mais fique sem água em casa ou no trabalho.',
+                    icon: Droplets,
+                  },
+                  {
+                    title: 'Entrega grátis',
+                    desc: 'Você não paga nada a mais por isso.',
+                    icon: Truck,
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-5 group sm:items-center">
+                    <div className="flex-shrink-0 w-12 h-12 bg-blue-50 text-[#30BEFF] rounded-2xl flex items-center justify-center group-hover:bg-[#30BEFF] group-hover:text-white transition-all duration-300">
+                      <item.icon className="w-6 h-6" />
+                    </div>
+                    <div className="space-y-1">
+                      <h4 className="text-xl font-black text-[#161A4A] flex items-center gap-2">
+                        <Check className="w-5 h-5 text-[#30BEFF]" />{' '}
+                        {item.title}
+                      </h4>
+                      <p className="text-slate-500 font-medium">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* <div className="flex justify-center sm:justify-start mt-8 ">
+                <ButtonReflexo
+                  link={ctaWhatsApp}
+                  label="Assinar agora"
+                  icon={
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={18}
+                      height={18}
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.197.297-.768.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.793.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.288.173-1.412-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.896a9.825 9.825 0 012.893 6.994c-.002 5.45-4.436 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.158 11.892c0 2.096.547 4.142 1.588 5.94L0 24l6.305-1.654a11.882 11.882 0 005.732 1.463h.005c6.554 0 11.89-5.335 11.892-11.892a11.821 11.821 0 00-3.466-8.413" />
+                    </svg>
+                  }
+                  className="bg-[#30BEFF] w-fit font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group duration-700 transition-all"
+                />
+              </div> */}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      {/* <section className="py-24 bg-slate-50">
+        <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -423,21 +619,21 @@ export default function WaterDelivery() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Pricing Section */}
       <section id="planos" className="py-24 bg-white relative">
         <div className="container mx-auto  max-w-[1215px] w-[90%]">
           <div className="text-center max-w-2xl mx-auto mb-20 space-y-4">
             <h2 className="text-4xl md:text-6xl font-black text-[#161A4A] tracking-tighter">
-              Planos de Assinatura
+              Planos Mensais de Assinatura{' '}
             </h2>
             <p className="text-slate-500 text-lg">
               A hidratação da sua família com economia e conveniência total.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 items-stretch">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
             {plans.map((plan, i) => (
               <motion.div
                 key={i}
@@ -697,7 +893,7 @@ export default function WaterDelivery() {
       </footer>
 
       {/* Floating WhatsApp */}
-      <motion.a
+      {/* <motion.a
         href="#"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
@@ -707,7 +903,8 @@ export default function WaterDelivery() {
         <span className="absolute right-full mr-4 bg-white text-slate-900 px-4 py-2 rounded-xl font-bold text-sm shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-slate-100">
           Pedir Água Agora!
         </span>
-      </motion.a>
+      </motion.a> */}
+      <WhatsappAnimated />
     </div>
   )
 }
