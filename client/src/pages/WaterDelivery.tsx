@@ -2,296 +2,297 @@ import { motion } from "framer-motion";
 import { 
   Droplets, 
   Truck, 
-  Clock, 
-  ShieldCheck, 
-  Phone, 
-  MapPin, 
-  Instagram, 
-  Facebook,
-  ChevronRight,
-  ShoppingCart,
-  Star
+  Check, 
+  Plus, 
+  Minus,
+  MessageCircle,
+  HelpCircle,
+  Clock,
+  ShieldCheck,
+  Star,
+  ChevronDown
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
-const products = [
+const plans = [
   {
-    id: 1,
-    name: "Galão 20L (Retornável)",
-    price: "R$ 15,00",
-    description: "Água mineral puríssima em galão de 20 litros.",
-    image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=300&h=300&auto=format&fit=crop"
+    title: "Plano Essencial",
+    icon: "🥉",
+    gallons: "3 galões/mês",
+    desc: "Ideal para consumo básico",
+    price: "R$ 36,00",
+    daily: "R$ 1,20 por dia",
+    note: "Ideal pra quem consome pouco ou mora sozinho.",
+    color: "bg-orange-50",
+    textColor: "text-orange-700",
+    borderColor: "border-orange-100"
   },
   {
-    id: 2,
-    name: "Galão 10L (Retornável)",
-    price: "R$ 10,00",
-    description: "Ideal para famílias menores ou consumo moderado.",
-    image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=300&h=300&auto=format&fit=crop"
+    title: "Plano Família",
+    icon: "🥇",
+    tag: "Mais vendido",
+    gallons: "6 galões/mês",
+    desc: "Perfeito para famílias",
+    extra: "Nunca fica sem água",
+    price: "R$ 63,00",
+    daily: "R$ 2,10 por dia",
+    note: "O plano preferido de quem não quer se preocupar",
+    color: "bg-blue-600",
+    textColor: "text-white",
+    borderColor: "border-blue-400",
+    isFeatured: true
   },
   {
-    id: 3,
-    name: "Pack 12 Garrafas 500ml",
-    price: "R$ 18,00",
-    description: "Perfeito para levar na bolsa ou para eventos.",
-    image: "https://images.unsplash.com/photo-1523362628242-f5133cdf5470?q=80&w=300&h=300&auto=format&fit=crop"
+    title: "Plano Empresa",
+    icon: "🏢",
+    gallons: "10 galões/mês",
+    desc: "Ideal para comércios e escritórios",
+    extra: "Abastecimento garantido",
+    price: "R$ 96,00",
+    daily: "R$ 3,20 por dia",
+    note: "Max economia + previsibilidade.",
+    color: "bg-slate-900",
+    textColor: "text-white",
+    borderColor: "border-slate-700"
+  }
+];
+
+const faqs = [
+  {
+    q: "Posso mudar de plano depois?",
+    a: "Sim! Você pode ajustar seu plano conforme seu consumo."
+  },
+  {
+    q: "Posso pausar a assinatura?",
+    a: "Pode sim. É só avisar pelo WhatsApp."
+  },
+  {
+    q: "E se eu não consumir toda a água do mês?",
+    a: "Sem problema. Ajustamos a próxima entrega."
+  },
+  {
+    q: "Tem fidelidade ou multa?",
+    a: "Não. Aqui você fica porque é bom, não por obrigação."
   }
 ];
 
 export default function WaterDelivery() {
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900">
-      {/* Navbar */}
-      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
-        <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-blue-200">
-              <Droplets className="w-6 h-6" />
-            </div>
-            <span className="font-bold text-xl tracking-tight text-blue-900 font-heading uppercase">Pureza Express</span>
-          </div>
-          <div className="hidden md:flex items-center gap-8 font-medium">
-            <a href="#produtos" className="hover:text-blue-600 transition-colors">Produtos</a>
-            <a href="#vantagens" className="hover:text-blue-600 transition-colors">Vantagens</a>
-            <a href="#contato" className="hover:text-blue-600 transition-colors">Contato</a>
-          </div>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 shadow-md">
-            Pedir Agora
-          </Button>
-        </div>
-      </nav>
-
+    <div className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-[#30BEFF]/20 selection:text-[#161A4A]">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 overflow-hidden bg-gradient-to-b from-blue-50/50 to-white">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
-            <Badge className="bg-blue-100 text-blue-700 border-none px-4 py-1 text-sm rounded-full">
-              Entrega em até 30 minutos ⚡
-            </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold font-heading text-blue-950 leading-tight">
-              Água mineral <br />
-              <span className="text-blue-600 italic">fresca e pura</span> <br />
-              na sua porta.
-            </h1>
-            <p className="text-xl text-slate-600 max-w-lg leading-relaxed">
-              O serviço de entrega de água mais rápido e confiável da região. Peça agora pelo WhatsApp e receba em minutos.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="h-16 px-10 text-lg rounded-full bg-blue-600 shadow-xl shadow-blue-200">
-                Pedir pelo WhatsApp
-              </Button>
-              <Button size="lg" variant="outline" className="h-16 px-10 text-lg rounded-full border-2 border-blue-600 text-blue-600">
-                Ver Produtos
-              </Button>
-            </div>
-            <div className="flex items-center gap-6 pt-4">
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-12 h-12 rounded-full border-4 border-white bg-slate-200 overflow-hidden">
-                    <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="User" />
-                  </div>
-                ))}
-              </div>
-              <div className="text-sm">
-                <div className="flex text-yellow-400">
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
-                </div>
-                <p className="font-semibold text-slate-900">+500 clientes satisfeitos</p>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="absolute -inset-4 bg-blue-200/50 rounded-full blur-3xl -z-10" />
-            <img 
-              src="https://images.unsplash.com/photo-1616118132261-3bc826950229?q=80&w=800&auto=format&fit=crop" 
-              alt="Water Delivery" 
-              className="rounded-3xl shadow-2xl border-8 border-white"
-            />
-            {/* Floating Card */}
-            <motion.div 
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-              className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 hidden md:block"
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#161A4A]">
+        {/* Abstract Background Elements */}
+        <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
+          <img 
+            src="https://images.unsplash.com/photo-1616118132261-3bc826950229?q=80&w=1200&auto=format&fit=crop" 
+            alt="Water Texture" 
+            className="w-full h-full object-cover mix-blend-overlay"
+          />
+        </div>
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#30BEFF] rounded-full blur-[120px] opacity-20" />
+        
+        <div className="container mx-auto px-4 relative z-10 py-20">
+          <div className="max-w-3xl space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
             >
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-green-100 text-green-600 rounded-full">
-                  <Truck className="w-6 h-6" />
-                </div>
-                <div>
-                  <p className="text-sm text-slate-500 font-medium uppercase tracking-wider">Motorista à caminho</p>
-                  <p className="font-bold text-slate-900">Chegada em 8 min</p>
-                </div>
+              <Badge className="bg-[#30BEFF] text-white hover:bg-[#30BEFF] border-none px-4 py-1.5 text-xs font-bold tracking-widest uppercase rounded-full">
+                IMPERADOR DA ÁGUA | ASSINATURA COM ENTREGA GARANTIDA
+              </Badge>
+            </motion.div>
+
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-5xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter"
+            >
+              Nunca mais fique sem <span className="text-[#30BEFF]">água</span> em casa.
+            </motion.h1>
+
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-xl md:text-2xl text-slate-300 max-w-xl font-medium leading-relaxed"
+            >
+              Receba seus galões todo mês, sem taxa de entrega e sem dor de cabeça.
+            </motion.p>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4 pt-4"
+            >
+              <Button className="h-16 px-8 bg-[#30BEFF] hover:bg-[#25ace8] text-[#161A4A] font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group transition-all">
+                Pedir agora pelo WhatsApp 
+                <MessageCircle className="ml-2 w-6 h-6 fill-[#161A4A]" />
+              </Button>
+              <Button variant="outline" className="h-16 px-8 border-2 border-white/20 text-white hover:bg-white hover:text-[#161A4A] font-black text-lg rounded-2xl transition-all">
+                ASSINAR AGORA
+              </Button>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="flex items-center gap-6 pt-8 border-t border-white/10"
+            >
+              <div className="space-y-1">
+                <p className="text-white font-bold flex items-center gap-2">
+                  <Check className="w-5 h-5 text-[#30BEFF]" /> Simples, rápido e do seu jeito.
+                </p>
+                <p className="text-slate-400 text-sm flex items-center gap-4">
+                  <span>💳 Pix • Dinheiro • Cartão</span>
+                  <span className="flex items-center gap-1">🚚 <strong>Entrega GRÁTIS</strong></span>
+                </p>
               </div>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section id="vantagens" className="py-24 bg-slate-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-            <h2 className="text-4xl font-bold font-heading text-blue-950">Por que escolher a Pureza Express?</h2>
-            <p className="text-lg text-slate-600">Combinamos tecnologia com logística eficiente para garantir que você nunca fique sem água.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { icon: Clock, title: "Rapidez Recorde", desc: "Logística inteligente para entregas em tempo recorde na sua porta." },
-              { icon: ShieldCheck, title: "Qualidade Garantida", desc: "Água mineral testada e aprovada pelos órgãos de saúde competentes." },
-              { icon: Droplets, title: "Preço Justo", desc: "Os melhores valores da região com programa de fidelidade exclusivo." }
-            ].map((feature, i) => (
-              <Card key={i} className="border-none shadow-sm hover:shadow-xl transition-all duration-300 p-8 rounded-3xl bg-white group">
-                <div className="p-4 bg-blue-50 text-blue-600 rounded-2xl w-fit mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                  <feature.icon className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-blue-950 font-heading">{feature.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{feature.desc}</p>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* Products */}
-      <section id="produtos" className="py-24">
+      {/* Pricing Section */}
+      <section className="py-24 relative bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex items-end justify-between mb-16">
-            <div className="space-y-4">
-              <Badge variant="outline" className="border-blue-600 text-blue-600 rounded-full">Nossos Produtos</Badge>
-              <h2 className="text-4xl font-bold font-heading text-blue-950">Selecione seu pedido</h2>
-            </div>
-            <Button variant="ghost" className="text-blue-600 font-bold hover:bg-blue-50 rounded-full">
-              Ver catálogo completo <ChevronRight className="ml-2 w-4 h-4" />
-            </Button>
+          <div className="text-center max-w-2xl mx-auto mb-20 space-y-4">
+            <h2 className="text-4xl md:text-5xl font-black text-[#161A4A] tracking-tight">Planos Mensais de Assinatura</h2>
+            <p className="text-slate-500 text-lg">A hidratação da sua família com economia e conveniência.</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <motion.div 
-                key={product.id}
-                whileHover={{ y: -10 }}
-                className="group cursor-pointer"
+          <div className="grid md:grid-cols-3 gap-8 items-stretch">
+            {plans.map((plan, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="flex"
               >
-                <div className="bg-slate-100 rounded-[2.5rem] overflow-hidden mb-6 aspect-square relative">
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-                  />
-                  <div className="absolute top-4 right-4">
-                    <Button size="icon" className="rounded-full bg-white/90 backdrop-blur text-blue-600 hover:bg-blue-600 hover:text-white shadow-lg transition-all">
-                      <ShoppingCart className="w-5 h-5" />
-                    </Button>
+                <Card className={`relative flex flex-col w-full rounded-[2.5rem] p-10 transition-all duration-500 hover:shadow-2xl overflow-hidden border-2 ${plan.isFeatured ? 'border-[#30BEFF] scale-105 z-10 shadow-xl' : 'border-slate-100'}`}>
+                  {plan.tag && (
+                    <div className="absolute top-6 right-6">
+                      <Badge className="bg-yellow-400 text-[#161A4A] font-black uppercase tracking-wider border-none px-3 py-1">
+                        ⭐ {plan.tag}
+                      </Badge>
+                    </div>
+                  )}
+                  
+                  <div className="mb-8">
+                    <span className="text-4xl mb-4 block">{plan.icon}</span>
+                    <h3 className={`text-2xl font-black ${plan.isFeatured ? 'text-white' : 'text-[#161A4A]'}`}>{plan.title}</h3>
                   </div>
-                </div>
-                <div className="space-y-2 px-2">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-2xl font-bold text-blue-950 font-heading">{product.name}</h3>
-                    <span className="text-2xl font-bold text-blue-600">{product.price}</span>
+
+                  <div className="space-y-4 mb-10 flex-grow">
+                    <div className="flex items-center gap-3">
+                      <Check className={`w-5 h-5 ${plan.isFeatured ? 'text-[#30BEFF]' : 'text-blue-600'}`} />
+                      <span className={`font-bold ${plan.isFeatured ? 'text-blue-100' : 'text-slate-700'}`}>{plan.gallons}</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Check className={`w-5 h-5 ${plan.isFeatured ? 'text-[#30BEFF]' : 'text-blue-600'}`} />
+                      <span className={`font-bold ${plan.isFeatured ? 'text-blue-100' : 'text-slate-700'}`}>{plan.desc}</span>
+                    </div>
+                    {plan.extra && (
+                      <div className="flex items-center gap-3">
+                        <Check className={`w-5 h-5 ${plan.isFeatured ? 'text-[#30BEFF]' : 'text-blue-600'}`} />
+                        <span className={`font-bold ${plan.isFeatured ? 'text-blue-100' : 'text-slate-700'}`}>{plan.extra}</span>
+                      </div>
+                    )}
                   </div>
-                  <p className="text-slate-500">{product.description}</p>
-                </div>
+
+                  <div className={`mb-8 p-6 rounded-3xl ${plan.isFeatured ? 'bg-white/10 border border-white/20' : 'bg-slate-50 border border-slate-100'}`}>
+                    <p className={`text-sm font-bold uppercase tracking-widest mb-1 ${plan.isFeatured ? 'text-blue-200' : 'text-slate-400'}`}>Valor Mensal</p>
+                    <div className="flex items-baseline gap-1">
+                      <span className={`text-4xl font-black ${plan.isFeatured ? 'text-white' : 'text-[#161A4A]'}`}>{plan.price}</span>
+                      <span className={`text-sm ${plan.isFeatured ? 'text-blue-200' : 'text-slate-500'}`}>/mês</span>
+                    </div>
+                    <p className={`text-sm mt-2 font-medium ${plan.isFeatured ? 'text-[#30BEFF]' : 'text-blue-600'}`}>💸 Apenas {plan.daily}</p>
+                  </div>
+
+                  <p className={`text-sm font-medium mb-8 leading-relaxed ${plan.isFeatured ? 'text-blue-100' : 'text-slate-500'}`}>
+                    {plan.note}
+                  </p>
+
+                  <Button className={`w-full h-14 text-lg font-black rounded-2xl transition-all ${
+                    plan.isFeatured 
+                    ? 'bg-white text-[#161A4A] hover:bg-blue-50' 
+                    : plan.title === "Plano Empresa"
+                      ? 'bg-[#161A4A] text-white hover:bg-slate-800'
+                      : 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200'
+                  }`}>
+                    Assinar agora
+                  </Button>
+
+                  {plan.isFeatured && (
+                    <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-white/5 rounded-full pointer-events-none" />
+                  )}
+                </Card>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 container mx-auto px-4">
-        <div className="bg-blue-600 rounded-[3rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-2xl shadow-blue-200">
-          <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl translate-x-1/4 translate-y-1/4" />
-          
-          <div className="relative z-10 max-w-2xl mx-auto space-y-8">
-            <h2 className="text-4xl md:text-6xl font-bold font-heading leading-tight">Sua água acabou? <br /> Resolvemos agora.</h2>
-            <p className="text-xl text-blue-100">Clique no botão abaixo e seja atendido imediatamente por nossa equipe de logística.</p>
-            <Button size="lg" className="h-16 px-12 text-lg rounded-full bg-white text-blue-600 hover:bg-blue-50 font-bold shadow-xl">
-              Fazer Pedido via WhatsApp
-            </Button>
-            <div className="flex items-center justify-center gap-8 pt-4">
-              <div className="flex items-center gap-2">
-                <Phone className="w-5 h-5" />
-                <span className="font-medium">(11) 99999-9999</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-5 h-5" />
-                <span className="font-medium">Atendemos toda a cidade</span>
-              </div>
+      {/* FAQ Section */}
+      <section className="py-24 bg-[#F8FAFC]">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-16 space-y-4">
+            <Badge className="bg-white text-blue-600 border border-blue-100 px-4 py-1 rounded-full uppercase tracking-widest text-[10px] font-black">
+              TIRE SUAS DÚVIDAS
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-black text-[#161A4A]">Perguntas Frequentes</h2>
+            <p className="text-slate-500 text-lg">Confira as perguntas abaixo para esclarecer suas dúvidas.</p>
+          </div>
+
+          <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-slate-100">
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, i) => (
+                <AccordionItem key={i} value={`item-${i}`} className="border-b border-slate-100 py-4 last:border-0">
+                  <AccordionTrigger className="text-xl font-bold text-[#161A4A] hover:no-underline hover:text-blue-600 transition-colors text-left">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-slate-600 text-lg leading-relaxed pt-4 font-medium">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+            
+            <div className="mt-12 p-8 bg-blue-50 rounded-2xl border border-blue-100 text-center">
+              <p className="text-[#161A4A] font-bold text-lg mb-4">Ainda tem dúvidas?</p>
+              <Button variant="link" className="text-blue-600 font-black text-lg p-0 hover:no-underline hover:text-blue-700">
+                Clique aqui caso tenha mais dúvidas <ChevronDown className="ml-1 w-5 h-5" />
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-20 border-t border-slate-100">
-        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
-          <div className="col-span-2 space-y-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white">
-                <Droplets className="w-5 h-5" />
-              </div>
-              <span className="font-bold text-xl tracking-tight text-blue-900 font-heading">Pureza Express</span>
-            </div>
-            <p className="text-slate-500 max-w-sm leading-relaxed">
-              Levar saúde e hidratação para sua casa com agilidade e qualidade é o nosso compromisso diário.
-            </p>
-            <div className="flex gap-4">
-              <Button variant="outline" size="icon" className="rounded-full border-slate-200 text-slate-400 hover:text-blue-600 hover:border-blue-600">
-                <Instagram className="w-5 h-5" />
-              </Button>
-              <Button variant="outline" size="icon" className="rounded-full border-slate-200 text-slate-400 hover:text-blue-600 hover:border-blue-600">
-                <Facebook className="w-5 h-5" />
-              </Button>
-            </div>
-          </div>
-          
-          <div className="space-y-6">
-            <h4 className="font-bold text-blue-950 font-heading">Links Rápidos</h4>
-            <ul className="space-y-4 text-slate-500">
-              <li><a href="#" className="hover:text-blue-600">Início</a></li>
-              <li><a href="#" className="hover:text-blue-600">Produtos</a></li>
-              <li><a href="#" className="hover:text-blue-600">Vantagens</a></li>
-              <li><a href="#" className="hover:text-blue-600">Política de Entrega</a></li>
-            </ul>
-          </div>
-
-          <div className="space-y-6">
-            <h4 className="font-bold text-blue-950 font-heading">Atendimento</h4>
-            <ul className="space-y-4 text-slate-500">
-              <li className="flex items-center gap-3">
-                <Clock className="w-4 h-4 text-blue-600" />
-                <span>Seg - Sáb: 08h às 20h</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Clock className="w-4 h-4 text-blue-600" />
-                <span>Dom: 08h às 14h</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="container mx-auto px-4 pt-16 mt-16 border-t border-slate-50 text-center text-slate-400 text-sm">
-          <p>© 2025 Pureza Express. Todos os direitos reservados. Design por Studio.</p>
-        </div>
-      </footer>
+      {/* WhatsApp Floating Button */}
+      <motion.a
+        href="#"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center group"
+      >
+        <MessageCircle className="w-8 h-8 fill-current" />
+        <span className="absolute right-full mr-4 bg-white text-slate-900 px-4 py-2 rounded-xl font-bold text-sm shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-slate-100">
+          Precisa de ajuda?
+        </span>
+      </motion.a>
     </div>
   );
 }
