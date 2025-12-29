@@ -85,6 +85,8 @@ const plans = [
     color: 'bg-orange-50',
     textColor: 'text-orange-700',
     borderColor: 'border-orange-100',
+    labelButton: 'Assinar Plano Essencial',
+    cta: 'https://wa.me/+55991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral Plano Essencial (3 galões/mês.) Pode me ajudar?',
   },
   {
     title: 'Plano Família',
@@ -99,7 +101,9 @@ const plans = [
     color: 'bg-[#30BEFF]',
     textColor: 'text-white',
     borderColor: 'border-blue-400',
+    labelButton: 'Assinar Plano Família',
     isFeatured: true,
+    cta: 'https://wa.me/+55991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral Plano Família (6 galões/mês.) Pode me ajudar?',
   },
   {
     title: 'Plano Empresa',
@@ -113,6 +117,8 @@ const plans = [
     color: 'bg-slate-900',
     textColor: 'text-white',
     borderColor: 'border-slate-700',
+    labelButton: 'Assinar Plano Empresa',
+    cta: 'https://wa.me/+55991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral Plano Empresa (10 galões/mês.) Pode me ajudar?',
   },
 ]
 
@@ -657,7 +663,6 @@ export default function WaterDelivery() {
                       </Badge>
                     </div>
                   )}
-
                   <div className="mb-8">
                     <span className="text-4xl mb-4 block">{plan.icon}</span>
                     <h3
@@ -668,7 +673,6 @@ export default function WaterDelivery() {
                       {plan.title}
                     </h3>
                   </div>
-
                   <div className="space-y-4 mb-10 flex-grow">
                     {[plan.gallons, plan.desc, plan.extra]
                       .filter(Boolean)
@@ -693,7 +697,6 @@ export default function WaterDelivery() {
                         </div>
                       ))}
                   </div>
-
                   <div
                     className={`mb-8 p-6 rounded-3xl ${
                       plan.isFeatured
@@ -732,7 +735,6 @@ export default function WaterDelivery() {
                       💸 Apenas {plan.daily}
                     </p>
                   </div>
-
                   <p
                     className={`text-sm font-medium mb-8 leading-relaxed ${
                       plan.isFeatured ? 'text-blue-100' : 'text-slate-500'
@@ -740,10 +742,9 @@ export default function WaterDelivery() {
                   >
                     {plan.note}
                   </p>
-
                   <ButtonReflexo
-                    link={ctaWhatsApp}
-                    label="Contato"
+                    link={plan.cta}
+                    label={plan.labelButton}
                     icon={
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -760,7 +761,7 @@ export default function WaterDelivery() {
                         ? 'bg-[#30BEFF]  shadow-lg shadow-[#30BEFF]/30 transition-all duration-700'
                         : 'bg-[#161A4A] text-white transition-all duration-700'
                     } `}
-                  />
+                  />{' '}
                 </Card>
               </motion.div>
             ))}
@@ -770,13 +771,16 @@ export default function WaterDelivery() {
 
       {/* FAQ Section */}
       <section id="faq" className="py-24 bg-[#F8FAFC]">
-        <div className="container mx-auto  max-w-[1215px] w-[90%]">
+        <div className="container mx-auto  max-w-[1215px] w-[90%] cursor-pointer">
           <div className="text-center mb-16 space-y-4">
+            <Badge className="text-white border-none px-4 py-1.5 text-xs font-bold tracking-widest uppercase rounded-full">
+              TIRE SUAS DÚVIDAS
+            </Badge>
             <h2 className="text-4xl md:text-6xl font-black text-[#161A4A] tracking-tighter">
-              Dúvidas Frequentes
+              Perguntas Frequentes
             </h2>
             <p className="text-slate-500 text-lg">
-              Tudo o que você precisa saber sobre nosso serviço.
+              Confira as perguntas abaixo para esclarecer suas dúvidas.
             </p>
           </div>
 
