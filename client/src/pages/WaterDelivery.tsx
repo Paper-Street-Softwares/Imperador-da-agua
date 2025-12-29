@@ -471,7 +471,7 @@ export default function WaterDelivery() {
           </div>
           <ButtonReflexo
             link={ctaWhatsApp}
-            label="Assinar agora"
+            label="Escolher meu plano agora"
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -636,9 +636,9 @@ export default function WaterDelivery() {
             <h2 className="text-4xl md:text-6xl font-black text-[#161A4A] tracking-tighter">
               Planos Mensais de Assinatura{' '}
             </h2>
-            <p className="text-slate-500 text-lg">
+            {/* <p className="text-slate-500 text-lg">
               A hidratação da sua família com economia e conveniência total.
-            </p>
+            </p> */}
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
