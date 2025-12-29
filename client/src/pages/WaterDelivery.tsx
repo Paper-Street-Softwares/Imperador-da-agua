@@ -86,7 +86,7 @@ const plans = [
     textColor: 'text-orange-700',
     borderColor: 'border-orange-100',
     labelButton: 'Assinar Plano Essencial',
-    cta: 'https://wa.me/+55991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral Plano Essencial (3 galões/mês.) Pode me ajudar?',
+    cta: 'https://wa.me/+5571991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral Plano Essencial (3 galões/mês.) Pode me ajudar?',
   },
   {
     title: 'Plano Família',
@@ -103,7 +103,7 @@ const plans = [
     borderColor: 'border-blue-400',
     labelButton: 'Assinar Plano Família',
     isFeatured: true,
-    cta: 'https://wa.me/+55991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral Plano Família (6 galões/mês.) Pode me ajudar?',
+    cta: 'https://wa.me/+5571991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral Plano Família (6 galões/mês.) Pode me ajudar?',
   },
   {
     title: 'Plano Empresa',
@@ -118,7 +118,7 @@ const plans = [
     textColor: 'text-white',
     borderColor: 'border-slate-700',
     labelButton: 'Assinar Plano Empresa',
-    cta: 'https://wa.me/+55991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral Plano Empresa (10 galões/mês.) Pode me ajudar?',
+    cta: 'https://wa.me/+5571991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral Plano Empresa (10 galões/mês.) Pode me ajudar?',
   },
 ]
 
@@ -142,7 +142,7 @@ const faqs = [
 ]
 
 const ctaWhatsApp =
-  'https://wa.me/+55991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral. Pode me explicar?'
+  'https://wa.me/+5571991512007?text= Olá! Vim através do site e tenho interesse na assinatura de água mineral. Pode me explicar?'
 
 export default function WaterDelivery() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -159,6 +159,8 @@ export default function WaterDelivery() {
 
   const labels = ['Início', 'Benefícios', 'Planos', 'Dúvidas']
   const ids = ['home', 'services', 'planos', 'faq']
+
+  const currentYear = new Date().getFullYear()
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-[#30BEFF]/20">
@@ -713,7 +715,7 @@ export default function WaterDelivery() {
                     </p>
                     <div className="flex items-baseline gap-1">
                       <span
-                        className={`text-4xl font-black ${
+                        className={`text-2xl sm:text-4xl lg:text-2xl 2xl:text-4xl font-black ${
                           plan.isFeatured ? 'text-white' : 'text-[#161A4A]'
                         }`}
                       >
@@ -807,67 +809,22 @@ export default function WaterDelivery() {
 
       {/* Footer */}
       <footer className="py-24 bg-[#161A4A] text-white">
-        <div className="container m-auto max-w-[1215px] w-[90%]">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
-            <div className="col-span-2 space-y-8">
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 bg-[#30BEFF] rounded-full flex items-center justify-center">
-                  <Droplets className="w-6 h-6" />
+        <div className="m-auto max-w-[1215px] w-[90%]">
+          <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-0 mb-16 ">
+            <div className="flex flex-col items-start gap-2 ">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white text-white">
+                  <img src={Logo} alt="Logomarca" className="w-[40%]" />
                 </div>
-                <span className="font-black text-2xl uppercase tracking-tighter">
-                  Pureza Express
+                <span className="font-bold text-xl tracking-tight text-white font-heading uppercase">
+                  Imperador da Água
                 </span>
               </div>
               <p className="text-slate-400 max-w-sm text-lg font-medium leading-relaxed">
-                A melhor água da cidade, entregue com a agilidade que sua
-                família merece.
+                Assinatura mensal de água com entrega garantida
               </p>
-              <div className="flex gap-4">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="rounded-2xl border-white/10 bg-white/5 hover:bg-[#30BEFF] hover:border-[#30BEFF] transition-all"
-                >
-                  <Instagram className="w-5 h-5" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="rounded-2xl border-white/10 bg-white/5 hover:bg-[#30BEFF] hover:border-[#30BEFF] transition-all"
-                >
-                  <Facebook className="w-5 h-5" />
-                </Button>
-              </div>
-            </div>
-
-            <div className="space-y-6 min-w-[150px] w-full">
-              <h4 className="font-black text-xl tracking-tight">Atendimento</h4>
-              <ul className="space-y-4 text-slate-400 font-medium">
-                <li className="flex items-center gap-3 text-sm">
-                  <span>
-                    {' '}
-                    <Clock className="w-5 h-5 text-[#30BEFF]" />
-                  </span>
-                  <span>Seg - Sáb: 08h às 20h</span>
-                </li>
-                <li className="flex items-center gap-3 text-sm">
-                  <span>
-                    {' '}
-                    <Phone className="w-5 h-5 text-[#30BEFF]" />
-                  </span>
-                  <span>(11) 99999-9999</span>
-                </li>
-                <li className="flex items-center gap-3 text-sm">
-                  <span>
-                    {' '}
-                    <MapPin className="w-5 h-5 text-[#30BEFF]" />
-                  </span>
-                  <span>Atendemos toda a região</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-6 text-center md:text-left">
+            </div>{' '}
+            <div className="space-y-6 text-start  ">
               <h4 className="font-black text-xl tracking-tight">
                 Precisa de água?
               </h4>
@@ -885,13 +842,51 @@ export default function WaterDelivery() {
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.197.297-.768.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.793.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.288.173-1.412-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.896a9.825 9.825 0 012.893 6.994c-.002 5.45-4.436 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.158 11.892c0 2.096.547 4.142 1.588 5.94L0 24l6.305-1.654a11.882 11.882 0 005.732 1.463h.005c6.554 0 11.89-5.335 11.892-11.892a11.821 11.821 0 00-3.466-8.413" />
                   </svg>
                 }
-                className="bg-[#30BEFF] font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group transition-all duration-700"
+                className="bg-[#30BEFF] px-[18px] w-fit font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group transition-all duration-700"
               />
+            </div>
+            <div className="space-y-6 ">
+              <h4 className="font-black text-xl tracking-tight">Atendimento</h4>
+              <ul className="space-y-4 text-slate-400 font-medium">
+                <li className="flex items-center gap-3 text-sm">
+                  <span>
+                    {' '}
+                    <Clock className="w-5 h-5 text-[#30BEFF]" />
+                  </span>
+                  <span>Atendimento online</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <span>
+                    {' '}
+                    <Phone className="w-5 h-5 text-[#30BEFF]" />
+                  </span>
+                  <span>(71) 99151-2007</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <span>
+                    {' '}
+                    <MapPin className="w-5 h-5 text-[#30BEFF]" />
+                  </span>
+                  <span>Salvador - BA</span>
+                </li>
+              </ul>
             </div>
           </div>
           <div className="pt-8 border-t border-white/5 text-center text-slate-500 text-sm font-bold">
-            © 2025 Pureza Express. Imperador da Água. Todos os direitos
-            reservados.
+            <div className="text-center w-full phone2:w-[90%] mx-auto max-w-[1110px] flex flex-col">
+              <p className="w-full opacity-75">
+                {`© ${currentYear} - Imperador da Água - Todos os direitos reservados`}
+              </p>
+              <p>
+                <a
+                  className="transition hover:underline"
+                  target="_blank"
+                  href="https://www.paperstreet.com.br"
+                >
+                  Desenvolvido por Paper Street
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </footer>
