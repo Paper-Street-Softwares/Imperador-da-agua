@@ -792,7 +792,7 @@ export default function WaterDelivery() {
                   value={`item-${i}`}
                   className="border-b border-slate-100 py-4 last:border-0 cursor-pointer"
                 >
-                  <AccordionTrigger className="text-xl font-bold text-[#161A4A] hover:no-underline hover:text-[#30BEFF] transition-colors text-left">
+                  <AccordionTrigger className="text-xl font-bold text-[#161A4A] hover:no-underline hover:text-[#30BEFF] transition-colors text-left cursor-pointer">
                     {faq.q}
                   </AccordionTrigger>
                   <AccordionContent className="text-slate-600 text-lg leading-relaxed pt-4 font-medium">
