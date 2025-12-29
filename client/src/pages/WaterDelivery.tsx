@@ -21,6 +21,8 @@ import {
   Link as LinkIcon,
   Upload,
   Phone,
+  X,
+  Menu,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -34,6 +36,8 @@ import {
 import imgHero from '../../../attached_assets/Hero/imageHero.webp'
 import ButtonReflexo from '../../../client/src/components/ui/ButtonReflexo.jsx'
 import Logo from '../../../attached_assets/logo/imgLogo.webp'
+import { useState, useEffect } from 'react'
+import { Link } from 'react-scroll'
 
 const products = [
   {
@@ -124,38 +128,64 @@ const faqs = [
   },
 ]
 
+const ctaWhatsApp =
+  'https://wa.me/+55991512007?text= Olá! Vim através do site de vocês e gostaria de tirar umas dúvidas.'
+
 export default function WaterDelivery() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [active, setActive] = useState(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const labels = ['Início', 'Benefícios', 'Planos', 'Dúvidas']
+  const ids = ['home', 'services', 'planos', 'faq']
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-[#30BEFF]/20">
       {/* Navbar */}
-      <nav className="fixed top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 w-full">
+      <nav
+        className={`fixed top-0 z-50 w-full ${
+          isScrolled
+            ? 'bg-[#161A4A] text-white py-1 shadow-sm border-b-[1px] border-white h-auto transition-all duration-700'
+            : 'bg-transparent border-border/40 py-3 phone2:h-auto text-white transition-all duration-700'
+        }`}
+      >
         <div className=" h-20 flex items-center justify-between max-w-[1215px] w-[90%] mx-auto">
-          <div className="flex items-center gap-1">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center text-white shadow-lg shadow-blue-200">
+          <div className="flex items-center gap-2">
+            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white text-white">
               <img src={Logo} alt="Logomarca" className="w-[40%]" />
             </div>
-            <span className="font-bold text-xl tracking-tight text-[#161A4A] font-heading uppercase">
+            <span className="font-bold text-xl tracking-tight text-white font-heading uppercase">
               Imperador da Água
             </span>
           </div>{' '}
           <div className="hidden md:flex items-center gap-8 font-medium">
-            <a
-              href="#produtos"
-              className="hover:text-[#30BEFF] transition-colors"
-            >
-              Produtos
-            </a>
-            <a
-              href="#planos"
-              className="hover:text-[#30BEFF] transition-colors"
-            >
-              Assinaturas
-            </a>
-            <a href="#faq" className="hover:text-[#30BEFF] transition-colors">
-              Dúvidas
-            </a>
+            {labels.map((item, index) => (
+              <Link
+                to={ids[index]}
+                aria-label={`Link para ${item}`}
+                smooth={true}
+                duration={500}
+                offset={-90}
+                spy={true}
+                hashSpy={true}
+                tag="a"
+                href={`#${ids[index]}`}
+                className="cursor-pointer bg-gradient-to-r from-primary to-primary bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-[background-size] duration-300 hover:bg-[length:100%_2px]"
+              >
+                {item}
+              </Link>
+            ))}
           </div>
           <ButtonReflexo
+            link={ctaWhatsApp}
             label="Contato"
             icon={
               <svg
@@ -168,33 +198,100 @@ export default function WaterDelivery() {
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.197.297-.768.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.793.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.288.173-1.412-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.896a9.825 9.825 0 012.893 6.994c-.002 5.45-4.436 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.158 11.892c0 2.096.547 4.142 1.588 5.94L0 24l6.305-1.654a11.882 11.882 0 005.732 1.463h.005c6.554 0 11.89-5.335 11.892-11.892a11.821 11.821 0 00-3.466-8.413" />
               </svg>
             }
-            className="bg-[#30BEFF] hover:bg-[#25ace8] text-white font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group transition-all"
+            className="bg-[#30BEFF] hidden lg:flex font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group transition-all duration-700 "
           />
+          {/* Mobile Toggle */}
+          <button
+            className="md:hidden p-2 z-50 relative text-foreground "
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <X
+                aria-label="Botão de fechar a Sidebar"
+                className="text-primary"
+              />
+            ) : (
+              <Menu
+                aria-label="botão Meu da Sidebar"
+                width={30}
+                height={30}
+                className="text-white"
+              />
+            )}
+          </button>
         </div>
+
+        {isMobileMenuOpen && (
+          <div className="fixed inset-0 pt-24 px-6 lg:hidden z-40 w-full">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="fixed inset-0 pt-24 px-6 lg:hidden z-40 w-full"
+            >
+              <div className="flex flex-col gap-6 bg-[#161A4A] max-w-[500px] text-center items-center text-lg mx-auto font-secondFont font-medium border-l border-r border-b border-primary/20 rounded-md">
+                {labels.map((item, index) => (
+                  <Link
+                    to={ids[index]}
+                    aria-label={`Link para ${item}`}
+                    smooth={true}
+                    duration={500}
+                    offset={-90}
+                    spy={true}
+                    hashSpy={true}
+                    tag="a"
+                    href={`#${ids[index]}`}
+                    className={`cursor-pointer transition-all w-full ${
+                      active === index ? 'text-[#161A4A]' : 'text-white'
+                    }`}
+                  >
+                    {item}
+                  </Link>
+                ))}
+                <ButtonReflexo
+                  link={ctaWhatsApp}
+                  icon={
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={18}
+                      height={18}
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.197.297-.768.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.793.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.288.173-1.412-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.896a9.825 9.825 0 012.893 6.994c-.002 5.45-4.436 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.158 11.892c0 2.096.547 4.142 1.588 5.94L0 24l6.305-1.654a11.882 11.882 0 005.732 1.463h.005c6.554 0 11.89-5.335 11.892-11.892a11.821 11.821 0 00-3.466-8.413" />
+                    </svg>
+                  }
+                  label="Contato"
+                  colorMode="dark"
+                  className="w-fit border-[1px]"
+                />
+              </div>
+            </motion.div>
+            <div className="absolute z-0 inset-0 bg-white/70 h-screen"></div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#161A4A] pt-20">
+      <section
+        id="home"
+        className="relative h-auto flex items-center overflow-hidden bg-[#161A4A] pt-20"
+      >
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none">
-          <img
-            src="https://images.unsplash.com/photo-1616118132261-3bc826950229?q=80&w=1200&auto=format&fit=crop"
-            alt="Water Texture"
-            className="w-full h-full object-cover mix-blend-overlay"
-          />
+          {' '}
         </div>
         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#30BEFF] rounded-full blur-[120px] opacity-20" />
         <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#30BEFF] rounded-full blur-[120px] opacity-20" />
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#30BEFF] rounded-full blur-[120px] opacity-20" />
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#30BEFF] rounded-full blur-[120px] opacity-20" />
 
-        <div className="container mx-auto max-w-[1215px] justify-between w-[90%] relative z-10 grid lg:grid-cols-2 gap-12 items-center py-24">
+        <div className="container mx-auto max-w-[1215px] justify-between w-[90%] relative z-10 grid lg:grid-cols-2 gap-12 items-center py-12 lg:py-36">
           <div className="space-y-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <Badge className="bg-[#30BEFF] text-white border-none px-4 py-1.5 text-xs font-bold tracking-widest uppercase rounded-full">
-                ENTREGA EM ATÉ 30 MINUTOS ⚡
+              <Badge className="text-white border-none px-4 py-1.5 text-xs font-bold tracking-widest uppercase rounded-full">
+                ÁGUA MINERAL POR ASSINATURA
               </Badge>
             </motion.div>
 
@@ -204,8 +301,11 @@ export default function WaterDelivery() {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-8xl w-[90%] font-black text-white leading-[0.9] tracking-tighter"
             >
-              Nunca mais fique sem <span className="text-[#30BEFF]">água</span>{' '}
-              em casa.
+              Nunca mais fique sem{' '}
+              <i>
+                <span className="text-[#30BEFF]">água</span>
+              </i>{' '}
+              em casa!
             </motion.h1>
 
             <motion.p
@@ -225,7 +325,8 @@ export default function WaterDelivery() {
               className="flex flex-col sm:flex-row gap-4 pt-4"
             >
               <ButtonReflexo
-                label="Pedir agora pelo WhatsApp"
+                link={ctaWhatsApp}
+                label="ASSINAR AGORA"
                 icon={
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -237,11 +338,13 @@ export default function WaterDelivery() {
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.197.297-.768.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.793.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.288.173-1.412-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.896a9.825 9.825 0 012.893 6.994c-.002 5.45-4.436 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.158 11.892c0 2.096.547 4.142 1.588 5.94L0 24l6.305-1.654a11.882 11.882 0 005.732 1.463h.005c6.554 0 11.89-5.335 11.892-11.892a11.821 11.821 0 00-3.466-8.413" />
                   </svg>
                 }
-                className="bg-[#30BEFF] hover:bg-[#25ace8] text-white font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group transition-all"
+                className="bg-[#30BEFF] font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group duration-700 transition-all"
               />
 
-              <ButtonReflexo
+              {/* <ButtonReflexo
+                link={ctaWhatsApp}
                 label="Pedir agora pelo WhatsApp"
+                colorMode="dark"
                 icon={
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -253,8 +356,8 @@ export default function WaterDelivery() {
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.197.297-.768.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.793.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.288.173-1.412-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.896a9.825 9.825 0 012.893 6.994c-.002 5.45-4.436 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.158 11.892c0 2.096.547 4.142 1.588 5.94L0 24l6.305-1.654a11.882 11.882 0 005.732 1.463h.005c6.554 0 11.89-5.335 11.892-11.892a11.821 11.821 0 00-3.466-8.413" />
                   </svg>
                 }
-                className="bg-white/30 hover:bg-[#25ace8] text-white font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group transition-all"
-              />
+                className="bg-[#161A4A] font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group transition-all duration-700 border border-white/50"
+              /> */}
             </motion.div>
 
             <motion.div
@@ -263,12 +366,12 @@ export default function WaterDelivery() {
               transition={{ delay: 0.6 }}
               className="flex items-center gap-6 pt-8 border-t border-white/10"
             >
-              <div className="space-y-1">
-                <p className="text-white font-bold flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row space-y-4 mx-auto m- justify-between">
+                <p className="text-white font-bold flex items-center gap-2 sm:text-sm">
                   <Check className="w-5 h-5 text-[#30BEFF]" /> Simples, rápido e
                   do seu jeito.
                 </p>
-                <p className="text-slate-400 text-sm flex items-center gap-4">
+                <p className="text-slate-400 text-sm flex flex-col items-center gap-4">
                   <span>💳 Pix • Dinheiro • Cartão</span>
                   <span className="flex items-center gap-1 text-[#30BEFF]">
                     🚚 <strong>Entrega GRÁTIS</strong>
@@ -278,14 +381,14 @@ export default function WaterDelivery() {
             </motion.div>
           </div>
 
-          <div className="w-[90%] flex m-auto desktop1:ml-auto ">
+          <div className="w-[90%] flex m-auto lg:ml-auto ">
             <img src={imgHero} alt="Imagem ilustrativa de água" />
           </div>
         </div>
       </section>
 
       {/* Features */}
-      <section className="py-24 bg-slate-50">
+      <section id="services" className="py-24 bg-slate-50">
         <div className="container mx-auto  max-w-[1215px] w-[90%]">
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -442,15 +545,26 @@ export default function WaterDelivery() {
                     {plan.note}
                   </p>
 
-                  <Button
-                    className={`w-full h-14 text-lg font-black rounded-2xl transition-all ${
+                  <ButtonReflexo
+                    link={ctaWhatsApp}
+                    label="Contato"
+                    icon={
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={18}
+                        height={18}
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.197.297-.768.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.793.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.288.173-1.412-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.896a9.825 9.825 0 012.893 6.994c-.002 5.45-4.436 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.158 11.892c0 2.096.547 4.142 1.588 5.94L0 24l6.305-1.654a11.882 11.882 0 005.732 1.463h.005c6.554 0 11.89-5.335 11.892-11.892a11.821 11.821 0 00-3.466-8.413" />
+                      </svg>
+                    }
+                    className={`bg-[#30BEFF]  font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group transition-all ${
                       plan.isFeatured
-                        ? 'bg-[#30BEFF] text-white hover:bg-[#25ace8] shadow-lg shadow-[#30BEFF]/30'
-                        : 'bg-slate-100 text-[#161A4A] hover:bg-slate-200'
-                    }`}
-                  >
-                    Assinar agora
-                  </Button>
+                        ? 'bg-[#30BEFF]  shadow-lg shadow-[#30BEFF]/30 transition-all duration-700'
+                        : 'bg-[#161A4A] text-white transition-all duration-700'
+                    } `}
+                  />
                 </Card>
               </motion.div>
             ))}
@@ -476,7 +590,7 @@ export default function WaterDelivery() {
                 <AccordionItem
                   key={i}
                   value={`item-${i}`}
-                  className="border-b border-slate-100 py-4 last:border-0"
+                  className="border-b border-slate-100 py-4 last:border-0 cursor-pointer"
                 >
                   <AccordionTrigger className="text-xl font-bold text-[#161A4A] hover:no-underline hover:text-[#30BEFF] transition-colors text-left">
                     {faq.q}
@@ -557,9 +671,22 @@ export default function WaterDelivery() {
               <h4 className="font-black text-xl tracking-tight">
                 Precisa de água?
               </h4>
-              <Button className="w-fit h-8 bg-[#30BEFF] text-[#161A4A] font-black rounded-2xl hover:bg-white transition-all">
-                Contato
-              </Button>
+              <ButtonReflexo
+                link={ctaWhatsApp}
+                label="Contato"
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={18}
+                    height={18}
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.197.297-.768.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.793.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.288.173-1.412-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.896a9.825 9.825 0 012.893 6.994c-.002 5.45-4.436 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.158 11.892c0 2.096.547 4.142 1.588 5.94L0 24l6.305-1.654a11.882 11.882 0 005.732 1.463h.005c6.554 0 11.89-5.335 11.892-11.892a11.821 11.821 0 00-3.466-8.413" />
+                  </svg>
+                }
+                className="bg-[#30BEFF] font-black text-lg rounded-2xl shadow-xl shadow-[#30BEFF]/20 group transition-all duration-700"
+              />
             </div>
           </div>
           <div className="pt-8 border-t border-white/5 text-center text-slate-500 text-sm font-bold">
