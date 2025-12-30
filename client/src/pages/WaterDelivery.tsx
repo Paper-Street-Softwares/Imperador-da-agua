@@ -243,7 +243,7 @@ export default function WaterDelivery() {
               animate={{ opacity: 1, y: 0 }}
               className="fixed inset-0 pt-24 px-6 lg:hidden z-40 w-full"
             >
-              <div className="flex flex-col gap-6 bg-[#161A4A] max-w-[500px] text-center items-center text-lg mx-auto font-secondFont font-medium border-l border-r border-b border-primary/20 rounded-md">
+              <div className="flex flex-col gap-6 bg-[#161A4A] max-w-[500px] py-6 text-center items-center text-lg mx-auto font-secondFont font-medium border-l border-r border-b border-primary/20 rounded-md">
                 {labels.map((item, index) => (
                   <Link
                     to={ids[index]}
