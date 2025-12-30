@@ -76,56 +76,56 @@ const products = [
 const waterPlans = {
   3: {
     title: 'Plano 3 Águas',
-    price: 'R$ 36/mês',
+    price: 'R$ 36,00',
     unit: 'R$ 12,00 por unidade',
     daily: 'R$ 1,20 por dia',
     note: 'Ideal pra quem consome pouco ou mora sozinho.',
   },
   4: {
     title: 'Plano 4 Águas',
-    price: 'R$ 44/mês',
+    price: 'R$ 44,00',
     unit: 'R$ 11,00 por unidade',
     daily: 'R$ 1,46 por dia',
     note: 'Plano perfeito para quem quer segurança, reserva e economia.',
   },
   5: {
     title: 'Plano 5 Águas',
-    price: 'R$ 54/mês',
+    price: 'R$ 54,00',
     unit: 'R$ 10,80 por unidade',
     daily: 'R$ 1,80 por dia',
     note: 'Excelente para casas pequenas e famílias que consomem mais.',
   },
   6: {
     title: 'Plano 6 Águas',
-    price: 'R$ 63/mês',
+    price: 'R$ 63,00',
     unit: 'R$ 10,50 por unidade',
     daily: 'R$ 2,10 por dia',
     note: 'Custo-benefício forte para quem usa bastante água.',
   },
   7: {
     title: 'Plano 7 Águas',
-    price: 'R$ 72/mês',
+    price: 'R$ 72,00',
     unit: 'R$ 10,28 por unidade',
     daily: 'R$ 2,40 por dia',
     note: 'Ideal para famílias grandes ou uso intenso.',
   },
   8: {
     title: 'Plano 8 Águas',
-    price: 'R$ 80/mês',
+    price: 'R$ 80,00',
     unit: 'R$ 10,00 por unidade',
     daily: 'R$ 2,66 por dia',
     note: 'Plano premium com preço psicológico perfeito.',
   },
   9: {
     title: 'Plano 9 Águas',
-    price: 'R$ 88/mês',
+    price: 'R$ 88,00',
     unit: 'R$ 9,77 por unidade',
     daily: 'R$ 2,93 por dia',
     note: 'Bom para estabelecimentos ou famílias com consumo alto.',
   },
   10: {
     title: 'Plano 10 Águas',
-    price: 'R$ 96/mês',
+    price: 'R$ 96,00',
     unit: 'R$ 9,60 por unidade',
     daily: 'R$ 3,20 por dia',
     note: 'Máxima economia + previsibilidade.',
@@ -902,4 +902,3 @@ export default function WaterDelivery() {
     </div>
   )
 }
-//comenta
