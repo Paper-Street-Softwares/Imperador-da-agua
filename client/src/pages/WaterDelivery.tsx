@@ -400,7 +400,7 @@ export default function WaterDelivery() {
                   do seu jeito.
                 </p>
 
-                <p className="text-slate-400 text-sm flex flex-col ">
+                <p className="text-white text-sm flex flex-col ">
                   <span className="inline-flex items-center gap-2">
                     <span>
                       <CreditCard className="w-5 h-5 text-[#30BEFF]" />
