@@ -318,7 +318,7 @@ export default function WaterDelivery() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <Badge className="text-white border-none  py-1.5 text-xs font-bold tracking-widest uppercase rounded-full">
+              <Badge className="text-white border-none px-4 py-1.5 text-xs font-bold tracking-widest uppercase rounded-full">
                 ÁGUA MINERAL POR ASSINATURA
               </Badge>
             </motion.div>
